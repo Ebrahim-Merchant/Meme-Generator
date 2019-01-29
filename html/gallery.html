@@ -1,0 +1,94 @@
+<html>
+<!-- Latest compiled and minified CSS -->
+<!-- Compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/custom.css">
+<link rel="stylesheet" href="../css/spectrum.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<!--Fabric.JS-->
+<script src="../js/fabric.min.js"></script>
+<script src="../js/spectrum.js"></script>
+<script src="../js/FileSaver.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<head>
+    <title>Meme Generator</title>
+</head>
+
+<body>
+
+
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">Meme Generator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse pull-left" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Gallery
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+
+
+    </nav>
+
+    <!-- Card Columns for Viewing Gallery -->
+    <div id='container'>
+
+        <div class="row" style="padding:10px">
+            <div class="col-md-2">
+            </div> 
+            <div class="col-md-8">
+                   <div class="card-columns" id="meme_viewer"></div>
+            </div>   
+            <div class="col-md-2">
+            </div>          
+        </div>
+    </div>
+
+    </body>
+    </html>
+
+
+    <script>
+    $(document).ready(function () {
+
+            //Gets all the pictures from the gallery and adds them to the card columns
+            $.get("../api/gallery_all.php", function (res) {
+                console.log(res);
+                for (var i = 0; i < res.length; i++) {
+                    var name = res[i]["name"]
+                    var name = name.replace(".png", "");
+                    var name = name.replace("-", " ");
+
+
+                    $("#meme_viewer").append('<div class="card bg-secondary text-white" style="width: 350px;">' + res[i]["img_url"] + 
+                        '<div class="card-body">'+
+                            '<p class="card-text"><h5>'+name.toUpperCase()+'</h5></p>'+
+                            '</div></div>'
+                            );
+                }
+
+            });
+        });
+
+
+    </script>
