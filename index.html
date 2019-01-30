@@ -56,23 +56,27 @@
     <div id='container'>
         <div class="row" style="padding:10px">
             <div class="col-md-2"></div>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <h2>Select a meme or <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
                         data-target="#upload">
                         Upload a picture
                     </button> </h2>
             </div>
+            <div class="col-md-2"></div>
+
         </div>
 
         <div style="margin:0 auto" class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="table-responsive">
                     <table id="meme_selector">
                         <tr style="margin:0 auto" id="meme_selector_row"></tr>
                     </table>
                 </div>
             </div>
+            <div class="col-md-2"></div>
+
         </div>
     </div>
 </body>
@@ -85,10 +89,10 @@
     <div class="row" style="padding:10px">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <button type="button" class="btn btn-outline-primary" id="random"><i class="fa fa-random"></i></button>
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#dwnLoad"><i class="fa fa-download"></i></button>
-            <button type="button" class="btn btn-outline-secondary" id="add"><i class="fa fa-plus"></i></button>
-            <button type="button" class="btn btn-outline-danger" id="delete"><i class="fa fa-trash"></i></button>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="Random Meme" class="btn btn-outline-primary" alt="Generate a Random Meme" id="random"><i class="fa fa-random"></i></button>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="Download your picture" class="btn btn-outline-success" alt="Download your current photo" data-toggle="modal" data-target="#dwnLoad"><i class="fa fa-download"></i></button>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="Add text to the canvas" class="btn btn-outline-secondary" id="add"><i class="fa fa-plus"></i></button>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="Delete selected text" class="btn btn-outline-danger" id="delete"><i class="fa fa-trash"></i></button>
             <input type='text' class="basic" />
 
 

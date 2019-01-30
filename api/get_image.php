@@ -15,13 +15,6 @@ if ($result->num_rows > 0) {
         $image = $row['picture'];
         $name = $row['name'];
         }
-        // //header("Content-type: image/png");
-        // header('Content-Disposition: attachment; filename="'.$name.'"');
-        // // header("Content-Transfer-Encoding: BASE64"); 
-        // // header('Expires: 0');
-        // // header('Pragma: no-cache');
-        // //header("Content-Length: ".strlen($image->data)); 
-        // echo $image; 
         echo 'data:image/png;base64,'.base64_encode( $image );
     
 
