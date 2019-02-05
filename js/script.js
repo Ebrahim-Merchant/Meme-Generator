@@ -1,15 +1,22 @@
 //Global Variables
 var globalColor = "#00000";
 var canvas = new fabric.Canvas('meme');
+var memeDict = {};
 canvas.backgroundColor = "black";
 $(document).ready(function () {
 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+
+      
     //gets all pictures for database
-    $.get("api/get_all.php", function (res) {
-        console.log(res);
-        for (var i = 0; i < res.length; i++) {
+    $.get("https://api.imgflip.com/get_memes", function (res) {
+        memes = res["data"]["memes"];
+        for (var i = 0; i < memes.length; i++) {
+            memeDict[memes[i]["id"]] = memes[i];
             //Adds them to the page
-            $("#meme_selector_row").append("<td>" + res[i]["img_url"] + "</td>");
+            $("#meme_selector_row").append("<td><img style='width:100px; height:100px;' id="+memes[i]["id"]+"  src=" + memes[i]["url"] + "></td>");
         }
 
     });
@@ -25,17 +32,17 @@ $(document).ready(function () {
     //sets the image to the canvas giving image ID
     function getImage(id) {
 
-        var imgElement = document.getElementById(id);
-        var img = $("#" + id);
+        var img = $("#" + id)[0];
+        var width = memeDict[id]["width"]
+        var height = memeDict[id]["height"];
+        var imgInstance = new fabric.Image(img);
+        canvas.setHeight($("#val").height());
+        canvas.setWidth($("#val").width());
 
-        var dummy_img = $("<img>").attr("src", $(img).attr("src"));
-        var width = dummy_img[0].width;
-        var height = dummy_img[0].height;
-
-        var imgInstance = new fabric.Image(imgElement);
-        canvas.setWidth(width);
-        canvas.setHeight(height);
-
+        imgInstance.set({
+            scaleX: canvas.getHeight()/height,
+            scaleY: canvas.getHeight()/height
+        });
         canvas.setBackgroundImage(imgInstance);
         canvas.centerObject(imgInstance)
         canvas.setBackgroundImage(imgInstance);
@@ -109,22 +116,24 @@ $(document).ready(function () {
 
     //Opens modal and ask user for name and handles downloaded of file
     $("#download").click(function () {
+        canvas.discardActiveObject();
+        canvas.renderAll();
         var name_file = $("#nameFile").val();
         if (name_file != "") {
             $("#meme").get(0).toBlob(function (blob) {
-                var fd = new FormData();
-                fd.append('fname', name_file + '.png');
-                fd.append('data', blob);
-                //Uploads the picutre to the gallery for other users to enjoy
-                $.ajax({
-                    type: 'POST',
-                    url: 'api/image.php',
-                    data: fd,
-                    processData: false,
-                    contentType: false
-                }).done(function (data) {
-                    console.log(data);
-                });
+                // var fd = new FormData();
+                // fd.append('fname', name_file + '.png');
+                // fd.append('data', blob);
+                // //Uploads the picutre to the gallery for other users to enjoy
+                // $.ajax({
+                //     type: 'POST',
+                //     url: 'api/image.php',
+                //     data: fd,
+                //     processData: false,
+                //     contentType: false
+                // }).done(function (data) {
+                //     console.log(data);
+                // });
 
                 saveAs(blob, name_file + ".png");
             });

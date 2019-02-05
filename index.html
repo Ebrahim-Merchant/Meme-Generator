@@ -1,11 +1,11 @@
 <html>
-<script src="js/jquery-3.3.1.min.js"></script> -->
+<script src="js/jquery-3.3.1.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <!-- Compiled and minified CSS -->
 <!-- Latest compiled and minified CSS -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
 <link rel="stylesheet" href="css/spectrum.css">
 
@@ -13,18 +13,19 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <!--Fabric.JS-->
 <script src="js/fabric.min.js"></script>
 <script src="js/spectrum.js"></script>
 <script src="js/FileSaver.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.js"></script>
 
 <head>
     <title>Meme Generator</title>
 </head>
+
 
 <body>
 <!-- Nav Bar -->
@@ -54,10 +55,14 @@
 <!-- Meme Selector Container -->
 
     <div id='container'>
+
+            
         <div class="row" style="padding:10px">
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+
+            </div>
             <div class="col-md-8">
-                <h2>Select a meme or <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                <h2> Select a meme or <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
                         data-target="#upload">
                         Upload a picture
                     </button> </h2>
@@ -88,16 +93,16 @@
 
     <div class="row" style="padding:10px">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <button type="button" data-toggle="tooltip" data-placement="top" title="Random Meme" class="btn btn-outline-primary" alt="Generate a Random Meme" id="random"><i class="fa fa-random"></i></button>
-            <button type="button" data-toggle="tooltip" data-placement="top" title="Download your picture" class="btn btn-outline-success" alt="Download your current photo" data-toggle="modal" data-target="#dwnLoad"><i class="fa fa-download"></i></button>
+        <div class="col-md-8" id="val" style="height:100%;width:100%">
+            <button type="button" data-toggle="tooltip" data-placement="top" title="Random Meme" class="btn btn-outline-primary" id="random"><i class="fa fa-random"></i></button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#dwnLoad"><i class="fa fa-download"></i></button>
             <button type="button" data-toggle="tooltip" data-placement="top" title="Add text to the canvas" class="btn btn-outline-secondary" id="add"><i class="fa fa-plus"></i></button>
             <button type="button" data-toggle="tooltip" data-placement="top" title="Delete selected text" class="btn btn-outline-danger" id="delete"><i class="fa fa-trash"></i></button>
             <input type='text' class="basic" />
 
 
 
-            <canvas id="meme" width="500px" height="300px"></canvas>
+            <canvas id="meme"></canvas>
             <img src="" id="image">
         </div>
         <div class="col-md-2">
@@ -144,7 +149,6 @@
     </div>
 </div>
 
-</div>
 
 
 
@@ -173,7 +177,6 @@
     </div>
 </div>
 
-</div>
 
 </html>
 
