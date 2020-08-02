@@ -138,8 +138,7 @@ const downloadImage = () => {
  * @namespace
  * @param {MemesItem[]} memes
  */
-function renderMemesList(memesLocal) {
-  memes = memesLocal;
+function renderMemesList(memes) {
 	const memeViewer = document.getElementById('memes-viewer');
 	memeViewer.innerHTML = '';
 	if (memes.length <= 0) {
@@ -259,10 +258,11 @@ const addImageToCanvas = (srcElement) => {
 
 /****** @end Canvas Handlers ******/
 
-/****** @start memes ********/
+/****** @start memes api request ********/
 const getMemes = async () => {
   const fetchMemes = await fetch(MEME_URL);
-  const { data: { memes }} = await fetchMemes.json();
+	const { data } = await fetchMemes.json();
+	memes = data.memes;
   renderMemesList(memes);
 }
 /****** @end memes ********/
