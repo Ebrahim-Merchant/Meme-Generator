@@ -49,10 +49,9 @@
           Delete Selected Element
         </button>
   
-        <!-- TODO: Add ability -->
-        <!-- <button type="button" title="Delete selected element" id="delete" onclick="deleteActiveObject()">
+        <button type="button" title="Add image" id="add-image" onclick="clickElementById('file-upload-image')">
           Add image
-        </button> -->
+        </button>
       </div>
       
 
@@ -92,8 +91,10 @@
           <button style="margin: 0 1rem;" onclick="toggleDownloadModal()" id="text-color-btn">Save</button>
       
           <input style="display: none;" id="file-upload" type="file" onchange="onFileChanged(event) "/>
+          <input style="display: none;" id="file-upload-image" type="file" onchange="onFileChanged(event, false) "/>
 
-         <button onclick="clickElementById('file-upload')" id="file-upload-btn">Upload image</button>
+
+         <button onclick="clickElementById('file-upload')" id="file-upload-btn">Upload background image</button>
 
       </div>
      

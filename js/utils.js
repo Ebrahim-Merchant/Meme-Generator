@@ -24,8 +24,15 @@ function getImageName(imageName) {
   }
 }
 
-const clickElementById = (id) => {
-	document.getElementById(id).click();
+const clickElementById = (id, options) => {
+  const element = document.getElementById(id);
+  if(options) {
+    Object.keys(options).forEach((attr) => {
+      element.setAttribute(`data-${attr}`, options[attr]);
+    })
+
+  }
+	element.click();
 }
 
 /********** @end utils **********/

@@ -5,7 +5,8 @@ let memes = [];
 let imageName = '';
 let canvasElement;
 const MEME_URL = 'https://api.imgflip.com/get_memes';
-const NO_IMAGE_TEMPLATE = '<div style="width:100%;height:100px;text-align:center">No images found</div>';
+const NO_IMAGE_TEMPLATE =
+	'<div style="width:100%;height:100px;text-align:center">No images found</div>';
 /******** @end variable ********/
 
 /******** @start events ********/
@@ -23,7 +24,7 @@ function move(direction) {
 		left: scrollLeft + total,
 		behavior: 'smooth',
 	});
-};
+}
 
 /**
  *  Picks a random image from the memes list
@@ -86,8 +87,8 @@ const colorChange = (event) => {
 };
 
 /**
- * 
- * @param {Event} event 
+ *
+ * @param {Event} event
  */
 const bgColorChange = (event) => {
 	backgroundColor = event.srcElement.value;
@@ -95,22 +96,19 @@ const bgColorChange = (event) => {
 		event.srcElement.value;
 	canvasElement.backgroundColor = event.srcElement.value;
 	canvasElement.renderAll();
-}
+};
 
-
-const onFileChanged = (event) => {
+const onFileChanged = (event, isBackground = true) => {
 	const fileReader = new FileReader();
 	fileReader.onload = (event) => {
 		const uploadedImage = new Image();
 		uploadedImage.src = event.target.result;
 		uploadedImage.id = 0;
-		uploadedImage.width = 500;
-		uploadedImage.height = 500;
 		uploadedImage.crossOrigin = '*';
-		addImageToCanvas(uploadedImage);
+		uploadedImage.onload = ()  => addImageToCanvas(uploadedImage, isBackground)
 	};
 	fileReader.readAsDataURL(event.target.files[0]);
-}
+};
 
 const downloadImage = () => {
 	const dataURL = canvasElement.toDataURL({
@@ -119,7 +117,7 @@ const downloadImage = () => {
 		left: 0,
 		top: 0,
 		format: 'png',
-  });
+	});
 
 	const link = document.createElement('a');
 	link.download = getImageName(imageName);
@@ -127,8 +125,7 @@ const downloadImage = () => {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
-
-}
+};
 
 /********** @end events ********/
 
@@ -162,8 +159,6 @@ function renameImage(event) {
 	imageName = event.srcElement.value;
 }
 
-
-
 /******* @start Event listeners *********/
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -193,7 +188,7 @@ document.getElementById('memes-viewer').addEventListener('scroll', (e) => {
 /****** @start Canvas Handlers ******/
 
 /**
- *  Initializes the Canvas with Fabric JS 
+ *  Initializes the Canvas with Fabric JS
  */
 const initCanvas = () => {
 	canvasElement = new fabric.Canvas('meme', { preserveObjectStacking: true });
@@ -219,7 +214,7 @@ const sizeCanvas = () => {
 	canvasElement.setWidth(canvasContainer.offsetWidth);
 	canvasElement.setHeight(canvasContainer.offsetHeight);
 	canvasElement.renderAll();
-}
+};
 
 /**
  *  resets the canvas
@@ -245,14 +240,14 @@ window.addEventListener('resize', sizeCanvas);
  *
  * @param {HTMLElement | Fabric.Image} srcElement
  */
-const addImageToCanvas = (srcElement) => {
-	resetCanvas();
+const addImageToCanvas = (srcElement, isBackground = true) => {
+	isBackground ? resetCanvas() : '';
 	const imgInstance =
 		srcElement instanceof HTMLElement
 			? new fabric.Image(srcElement)
 			: srcElement;
 	imgInstance.scaleToHeight(canvasElement.getHeight());
-	canvasElement.add(imgInstance);
+	isBackground ? canvasElement.setBackgroundImage(imgInstance) : canvasElement.add(imgInstance);
 	canvasElement.centerObject(imgInstance);
 };
 
@@ -260,9 +255,9 @@ const addImageToCanvas = (srcElement) => {
 
 /****** @start memes api request ********/
 const getMemes = async () => {
-  const fetchMemes = await fetch(MEME_URL);
+	const fetchMemes = await fetch(MEME_URL);
 	const { data } = await fetchMemes.json();
 	memes = data.memes;
-  renderMemesList(memes);
-}
+	renderMemesList(memes);
+};
 /****** @end memes ********/
