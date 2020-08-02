@@ -127,6 +127,8 @@ const downloadImage = () => {
 	document.body.removeChild(link);
 };
 
+const toggleDownloadModal = () => showModal('./template/download_modal.html');
+
 /********** @end events ********/
 
 /**
